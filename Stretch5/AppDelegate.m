@@ -16,8 +16,32 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+
+    NSString *homeDetails = @"My home is at the end of the street. Isn't that BOMB?!?";
+    NSArray *vowels = @[@"a", @"e", @"i", @"o", @"u"];
+    NSLog(@"Home Details: %@", homeDetails);
+    NSLog(@"There are %ld vowels in the string", (long)[self vowelCounter:homeDetails withVowels:vowels]);
+    
+    
     return YES;
+}
+
+- (NSInteger)vowelCounter:(NSString *)homeDetails withVowels:(NSArray *)vowels{
+    NSInteger count = 0;
+    
+    for (int i = 0; i < homeDetails.length; i++) {
+        for (int x = 0; x < vowels.count; x++) {
+            
+            NSString *letter = [NSString stringWithFormat:@"%@",[[homeDetails substringWithRange:NSMakeRange(i,1)] lowercaseString]];
+            NSString *vowel = [vowels objectAtIndex:x];
+            
+            if ([letter isEqualToString:vowel]) {
+                count++;
+                continue;
+            }
+        }
+    }
+    return count;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
